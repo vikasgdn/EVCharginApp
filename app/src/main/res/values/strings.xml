@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">EVCharginApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_map">Map</string>
+    <string name="please_signin">Please sign in into your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="please_provide_few_details">Please provide few details and sing up now.It\'s easy and quick.</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="accept">Accept our</string>
+    <string name="terms_and_con">Terms and Conditions</string>
+    <string name="please_complete_info">Please complete info below</string>
+    <string name="title">Title</string>
+    <string name="no_of_charge_points">No. Of Charge Points</string>
+    <string name="address">Address</string>
+    <string name="description">Description</string>
+    <string name="state">State</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_fav">Favourites</string>
+    <string name="menu_addstation">Add Station</string>
+    <string name="internet_error">Please check internet connectivity</string>
+    <string name="text_ok">OK</string>
+    <string name="add_station">Add Station</string>
+    <string name="login">Login</string>
+</resources>

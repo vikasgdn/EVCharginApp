@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6db545</color>
+    <color name="colorPrimaryDark">#4A8F23</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#6db545</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="hovercolor">#aaaaaa</color>
+
+
+    <color name="new_background_graylight">#F2F3F7</color>
+    <color name="new_textcolor_black">#3a3a3a</color>
+    <color name="new_textcolor_dark_grey">#969696</color>
+    <color name="new_header_white">#ffffff</color>
+    <color name="new_timer_matchcard">#0377E2</color>
+    <color name="new_light_blue_bg">#F0F9FF</color>
+    <color name="next_button_bg">#969696</color>
+    <color name="new_green">#6db545</color>
+    <color name="rejoin_text_color">#FFB840</color>
+    <color name="new_red_text_color">#E0635F</color>
+    <color name="light_grey_heading">#c0c0c0</color>
+    <color name="edit_text_bg">#f9f9f9</color>
+
+</resources>
