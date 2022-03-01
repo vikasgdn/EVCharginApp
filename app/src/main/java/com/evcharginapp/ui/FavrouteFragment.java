@@ -31,11 +31,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavrouteFragment extends Fragment implements INetworkEvent {
+public class FavrouteFragment extends Fragment implements INetworkEvent, View.OnClickListener {
 
     private FavrouteEVListAdapter evListAdapter;
     private List<EVBeans> mEVBeanList;
     private FragmentFavrouteBinding binding;
+    private int mPosition=0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -48,7 +49,7 @@ public class FavrouteFragment extends Fragment implements INetworkEvent {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mEVBeanList=new ArrayList<>();
-        evListAdapter=new FavrouteEVListAdapter(getContext(),mEVBeanList);
+        evListAdapter=new FavrouteEVListAdapter(getContext(),mEVBeanList,this);
         binding.rvEvlist.setAdapter(evListAdapter);
         getFavEVlistAPI();
 
@@ -61,7 +62,7 @@ public class FavrouteFragment extends Fragment implements INetworkEvent {
             try {
                 JSONObject jsonObject = new JSONObject();
 
-              //  jsonObject.put("user_id", AppPreference.INSTANCE.getGetUserId());
+                //  jsonObject.put("user_id", AppPreference.INSTANCE.getGetUserId());
                 jsonObject.put("uid", AppPreference.INSTANCE.getGetUId());
                 jsonObject.put("session_id", AppPreference.INSTANCE.getGetSessionId());
 
@@ -72,7 +73,25 @@ public class FavrouteFragment extends Fragment implements INetworkEvent {
         } else
             AppUtils.toast(getActivity(), getString(R.string.internet_error));
     }
+    private void saveFavroteEVAPI(int stationId)
+    {
+        if (NetworkStatus.isNetworkConnected(getActivity())) {
+            try {
 
+                JSONObject jsonObject = new JSONObject();
+                // jsonObject.put("user_id", AppPreference.INSTANCE.getGetUserId());
+                jsonObject.put("uid", AppPreference.INSTANCE.getGetUId());
+                jsonObject.put("session_id", AppPreference.INSTANCE.getGetSessionId());
+                jsonObject.put("stationid",""+stationId);
+                jsonObject.put("favourite","0");
+
+                NetworkService networkService = new NetworkService(jsonObject, NetworkURL.ADD_FAVEV_URL, AppConstant.METHOD_POST, this, getContext());
+                networkService.call(new NetworkModel());
+            }
+            catch (Exception e) { e.printStackTrace(); }
+        } else
+            AppUtils.toast(getActivity(), getString(R.string.internet_error));
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -88,40 +107,57 @@ public class FavrouteFragment extends Fragment implements INetworkEvent {
     public void onNetworkCallCompleted(String type, String service, String response) {
         Log.e("RESPONSE FavL SUCCESS","=== > "+response);
         binding.pbProgress.setVisibility(View.GONE);
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            if (jsonObject.optInt("status")==200)
-            {
-                if (jsonObject.optJSONArray("data")!=null && jsonObject.optJSONArray("data").length()>0)
-                {
-                    JSONArray dataArray = jsonObject.optJSONArray("data");
-                    for (int i=0;i<dataArray.length();i++)
-                    {
-                        JSONObject jsonObject1=dataArray.getJSONObject(i);
-                        EVBeans evBeans=new EVBeans();
-                        evBeans.setId(jsonObject1.optInt("id"));
-                        evBeans.setmDescription(jsonObject1.optString("description"));
-                        evBeans.setmLocationName(jsonObject1.optString("location_name"));
-                        evBeans.setmAddress(jsonObject1.optString("address"));
+        if (service.equalsIgnoreCase(NetworkURL.GET_FAVEV_URL)) {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.optInt("status") == 200) {
+                    if (jsonObject.optJSONArray("data") != null && jsonObject.optJSONArray("data").length() > 0) {
+                        JSONArray dataArray = jsonObject.optJSONArray("data");
+                        for (int i = 0; i < dataArray.length(); i++) {
+                            JSONObject jsonObject1 = dataArray.getJSONObject(i);
+                            EVBeans evBeans = new EVBeans();
+                            evBeans.setId(jsonObject1.optInt("id"));
+                            evBeans.setmDescription(jsonObject1.optString("description"));
+                            evBeans.setmLocationName(jsonObject1.optString("location_name"));
+                            evBeans.setmAddress(jsonObject1.optString("address"));
 
-                        mEVBeanList.add(evBeans);
+                            mEVBeanList.add(evBeans);
+                        }
+                        evListAdapter.notifyDataSetChanged();
+                    } else {
+                        binding.tvNodatafound.setVisibility(View.VISIBLE);
                     }
-                    evListAdapter.notifyDataSetChanged();
+                } else {
+                    AppUtils.toast(getActivity(), "" + jsonObject.optString("msg"));
                 }
-                else
-                {
-                    binding.tvNodatafound.setVisibility(View.VISIBLE);
-                }
-            }
-            else
-            {
-                AppUtils.toast(getActivity(),""+jsonObject.optString("msg"));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
-        catch (JSONException e)
+        else
         {
-            e.printStackTrace();
+            Log.e("RESPONSE FavL SUCCESS","=== > "+response);
+            binding.pbProgress.setVisibility(View.GONE);
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.optInt("status") == 200)
+                {
+                    mEVBeanList.remove(mPosition);
+                    evListAdapter.notifyDataSetChanged();
+
+                    // AppUtils.toast(getActivity(), "" + jsonObject.optString("msg"));
+                }
+                else {
+                    AppUtils.toast(getActivity(), "" + jsonObject.optString("msg"));
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
+
 
     }
 
@@ -131,4 +167,15 @@ public class FavrouteFragment extends Fragment implements INetworkEvent {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.iv_fav:
+                mPosition= Integer.parseInt(view.getTag().toString());
+                EVBeans evBeans=mEVBeanList.get(mPosition);
+                saveFavroteEVAPI(evBeans.getId());
+                break;
+        }
+    }
 }

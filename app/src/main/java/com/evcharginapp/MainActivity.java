@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import com.evcharginapp.apppreferences.AppPreference;
+import com.evcharginapp.dialog.Alert;
 import com.evcharginapp.ui.activity.BaseActivity;
 import com.evcharginapp.utils.LocationUtils;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     public LocationUtils mLocationUtils;
-
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +43,14 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_dashboard, R.id.nav_map, R.id.nav_favroute,R.id.nav_addstation).setOpenableLayout(drawer).build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
         binding.appBarMain.ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppPreference.INSTANCE.clearPreferences();
-                Intent intent=new Intent(MainActivity.this,SplashActivity.class);
-                startActivity(intent);
-                finish();
+                Alert.messageDialogWithYesNo(MainActivity.this,"");
             }
         });
         TextView mNameTV= binding.navView.getHeaderView(0).findViewById(R.id.tv_name);
@@ -67,5 +65,11 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if(navController.getCurrentDestination().getId()==R.id.nav_dashboard)
+            Alert.messageDialogWithYesNoExit(this,"");
+        else
+            super.onBackPressed();
+    }
 }

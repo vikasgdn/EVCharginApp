@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.evcharginapp.R;
 import com.evcharginapp.model.EVBeans;
 import com.evcharginapp.ui.DashboardFragment;
+import com.evcharginapp.ui.FavrouteFragment;
 
 import java.util.List;
 
@@ -19,11 +21,13 @@ public class FavrouteEVListAdapter extends RecyclerView.Adapter<FavrouteEVListAd
 
     private Context mContext;
     private List<EVBeans> mEVBeanList;
+    private FavrouteFragment mFavFragment;
 
 
-    public FavrouteEVListAdapter(Context context,List<EVBeans> list) {
+    public FavrouteEVListAdapter(Context context, List<EVBeans> list, FavrouteFragment favrouteFragment) {
         this.mContext = context;
         mEVBeanList=list;
+        this.mFavFragment=favrouteFragment;
     }
 
 
@@ -40,6 +44,10 @@ public class FavrouteEVListAdapter extends RecyclerView.Adapter<FavrouteEVListAd
         productViewHolder.mNameTV.setText(""+evBeans.getmLocationName());
         productViewHolder.mDescTV.setText(""+evBeans.getmDescription());
         productViewHolder.mLocationTV.setText(""+evBeans.getmAddress());
+
+        productViewHolder.mFavrouteIV.setTag(""+position);
+        productViewHolder.mFavrouteIV.setOnClickListener(mFavFragment);
+
 
     }
 
@@ -63,6 +71,7 @@ public class FavrouteEVListAdapter extends RecyclerView.Adapter<FavrouteEVListAd
             this.mNameTV = (TextView) view.findViewById(R.id.tv_title);
             this.mLocationTV = (TextView) view.findViewById(R.id.tv_location);
             this.mDescTV = (TextView) view.findViewById(R.id.tv_dec);
+            this.mFavrouteIV=view.findViewById(R.id.iv_fav);
         }
 
         public void onClick(View view) {

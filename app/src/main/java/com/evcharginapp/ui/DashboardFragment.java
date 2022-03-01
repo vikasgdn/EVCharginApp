@@ -38,6 +38,7 @@ public class DashboardFragment extends Fragment implements INetworkEvent, View.O
     private FragmentDashboardBinding binding;
     private List<EVBeans> mEVBeanList;
     private int mPosition=0;
+    private int mFavroutsStatus=1;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -67,6 +68,11 @@ public class DashboardFragment extends Fragment implements INetworkEvent, View.O
             case R.id.iv_fav:
                 mPosition= Integer.parseInt(view.getTag().toString());
                 EVBeans evBeans=mEVBeanList.get(mPosition);
+                if (evBeans.getmFavStation()==0)
+                    mFavroutsStatus=1;
+                else
+                    mFavroutsStatus=0;
+
                 saveFavroteEVAPI(evBeans.getId());
                 break;
         }
@@ -87,7 +93,7 @@ public class DashboardFragment extends Fragment implements INetworkEvent, View.O
                 jsonObject.put("uid", AppPreference.INSTANCE.getGetUId());
                 jsonObject.put("session_id", AppPreference.INSTANCE.getGetSessionId());
                 jsonObject.put("stationid",""+stationId);
-                jsonObject.put("favourite","1");
+                jsonObject.put("favourite",""+mFavroutsStatus);
 
                 NetworkService networkService = new NetworkService(jsonObject, NetworkURL.ADD_FAVEV_URL, AppConstant.METHOD_POST, this, getContext());
                 networkService.call(new NetworkModel());
@@ -171,9 +177,9 @@ public class DashboardFragment extends Fragment implements INetworkEvent, View.O
                 JSONObject jsonObject = new JSONObject(response);
                 if (jsonObject.optInt("status") == 200)
                 {
-                    mEVBeanList.get(mPosition).setmFavStation(1);
+                    mEVBeanList.get(mPosition).setmFavStation(mFavroutsStatus);
                     evListAdapter.notifyItemChanged(mPosition);
-                   // AppUtils.toast(getActivity(), "" + jsonObject.optString("msg"));
+                    // AppUtils.toast(getActivity(), "" + jsonObject.optString("msg"));
                 }
                 else {
                     AppUtils.toast(getActivity(), "" + jsonObject.optString("msg"));

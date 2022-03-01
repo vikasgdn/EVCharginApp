@@ -54,19 +54,27 @@ public class RegisterActivity extends BaseActivity implements INetworkEvent {
         {
             case R.id.btn_register:
                 if (TextUtils.isEmpty(registerBinding.etName.getText().toString()))
-                    AppUtils.toast(this,"Please Enter Valid Name");
-                else if (TextUtils.isEmpty(registerBinding.etEmail.getText().toString()))
-                    AppUtils.toast(this,"Please Enter Valid Email");
-                else if(TextUtils.isEmpty(registerBinding.etPassword.getText().toString()))
-                    AppUtils.toast(this,"Please Enter Valid Password");
-                else if(TextUtils.isEmpty(registerBinding.etPassword.getText().toString()))
-                    AppUtils.toast(this,"Please Enter Confirm Password");
-                else if(!registerBinding.etPassword.getText().toString().equalsIgnoreCase(registerBinding.etConfirmPassword.getText().toString()))
-                    AppUtils.toast(this,"Password and Confirm Password must be same");
-                else if(!registerBinding.cbTermcondition.isChecked())
-                    AppUtils.toast(this,"Please accept term & condition");
-                else
+                    AppUtils.toast(this, "Please Enter Valid Name");
+                else if (TextUtils.isEmpty(registerBinding.etEmail.getText().toString()) || !AppUtils.isValidEmail(registerBinding.etEmail.getText().toString()))
+                    AppUtils.toast(this, "Please Enter Valid Email");
+                else if (TextUtils.isEmpty(registerBinding.etPassword.getText().toString()))
+                    AppUtils.toast(this, "Please Enter Valid Password");
+                else if (registerBinding.etPassword.getText().toString().length() < 6 || registerBinding.etPassword.getText().toString().length() > 20)
+                    AppUtils.toast(this, "Password length must be 6-20 characters");
+                else if (!registerBinding.etPassword.getText().toString().matches(".*[0-9].*"))
+                    AppUtils.toast(this, "Password should contain at least 1 digit");
+                else if (!registerBinding.etPassword.getText().toString().matches(".*[a-zA-Z].*"))
+                    AppUtils.toast(this, "Password should contain at least 1 alphabet");
+                else if (TextUtils.isEmpty(registerBinding.etConfirmPassword.getText().toString()))
+                    AppUtils.toast(this, "Please Enter Confirm Password");
+                else if (!registerBinding.etPassword.getText().toString().equals(registerBinding.etConfirmPassword.getText().toString()))
+                    AppUtils.toast(this, "Password and Confirm Password must be same");
+                else if (!registerBinding.cbTermcondition.isChecked())
+                    AppUtils.toast(this, "Please accept term & condition");
+                else {
+                    AppUtils.hideKeyboard(this);
                     getRegisterAPI();
+                }
                 break;
             case R.id.btn_login:
                 Intent intent=new Intent(this,LoginActivity.class);
@@ -115,9 +123,10 @@ public class RegisterActivity extends BaseActivity implements INetworkEvent {
             if(jsonObject.optInt("status")==200)
             {
                 AppUtils.toast(this,jsonObject.optString("msg"));
-                Intent intent=new Intent(this,LoginActivity.class);
-                startActivity(intent);
-                finish();
+                setdataBlank();
+                //  Intent intent=new Intent(this,LoginActivity.class);
+                //startActivity(intent);
+                // finish();
             }
             else
             {
@@ -129,6 +138,13 @@ public class RegisterActivity extends BaseActivity implements INetworkEvent {
         }
     }
 
+    private void setdataBlank() {
+        registerBinding.etName.setText("");
+        registerBinding.etEmail.setText("");
+        registerBinding.etConfirmPassword.setText("");
+        registerBinding.etPassword.setText("");
+        registerBinding.cbTermcondition.setChecked(false);
+    }
 
 
     @Override

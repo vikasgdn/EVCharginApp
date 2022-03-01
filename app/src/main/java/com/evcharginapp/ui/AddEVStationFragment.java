@@ -80,6 +80,8 @@ public class AddEVStationFragment extends Fragment implements INetworkEvent, Vie
                 jsonObject.put("Address", binding.etAddress.getText().toString());
                 jsonObject.put("Description", binding.etDescription.getText().toString());
                 jsonObject.put("Charging_plugs_available", binding.etChargePoints.getText().toString());
+                jsonObject.put("State", binding.spState.getSelectedItem().toString());
+                jsonObject.put("Zipcode", binding.spZipcode.getSelectedItem().toString());
 
                 NetworkService networkService = new NetworkService(jsonObject, NetworkURL.ADD_EV_URL, AppConstant.METHOD_POST, this, getContext());
                 networkService.call(new NetworkModel());
@@ -184,6 +186,7 @@ public class AddEVStationFragment extends Fragment implements INetworkEvent, Vie
                     binding.etDescription.setText("");
                     binding.spState.setSelection(0);
                     binding.spZipcode.setSelection(0);
+
                 }
                 else
                     AppUtils.toast(getActivity(),jsonObject.optString("msg"));
@@ -209,16 +212,24 @@ public class AddEVStationFragment extends Fragment implements INetworkEvent, Vie
             case R.id.btn_add:
                 if (TextUtils.isEmpty(binding.etTitle.getText().toString()))
                     AppUtils.toast(getActivity(),"Please Enter Location Title");
-                else if(TextUtils.isEmpty(binding.etEmail.getText().toString()))
+                else if(TextUtils.isEmpty(binding.etEmail.getText().toString()) || !AppUtils.isValidEmail(binding.etEmail.getText().toString()))
                     AppUtils.toast(getActivity(),"Please Enter Email");
                 else if(TextUtils.isEmpty(binding.etChargePoints.getText().toString()))
                     AppUtils.toast(getActivity(),"Please Enter Available Charging Point");
+                else if(Integer.parseInt(binding.etChargePoints.getText().toString())<1)
+                    AppUtils.toast(getActivity(),"Please Enter minimum one Charging Point");
                 else if(TextUtils.isEmpty(binding.etAddress.getText().toString()))
                     AppUtils.toast(getActivity(),"Please Enter Address");
                 else if(TextUtils.isEmpty(binding.etDescription.getText().toString()))
                     AppUtils.toast(getActivity(),"Please Enter Description");
-                else
+                else if(binding.spState.getSelectedItem().toString().equalsIgnoreCase("Select State"))
+                    AppUtils.toast(getActivity(),"Please Select State");
+                else if(binding.spZipcode.getSelectedItem().toString().equalsIgnoreCase("Select zipCode"))
+                    AppUtils.toast(getActivity(),"Please Select ZipCode");
+                else {
+                    AppUtils.hideKeyboard(getActivity());
                     addEVStationDataAPI();
+                }
 
                 break;
         }

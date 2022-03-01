@@ -15,4 +15,11 @@
     <dimen name="d_30dp">30dp</dimen>
     <dimen name="d_30sp">30sp</dimen>
     <dimen name="d_button_height">40dp</dimen>
+    <dimen name="text_size_22">22sp</dimen>
+    <dimen name="d_15dp">15dp</dimen>
+    <dimen name="d_2dp">2dp</dimen>
+    <dimen name="d_12dp">12dp</dimen>
+    <dimen name="d_25dp">25dp</dimen>
+    <dimen name="s_text_size_14">14sp</dimen>
+    <dimen name="d_4dp">4dp</dimen>
 </resources>

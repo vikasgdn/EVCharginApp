@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EVCharginApp</string>
+    <string name="app_name">EVCharging</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -15,7 +15,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
-    <string name="please_provide_few_details">Please provide few details and sing up now.It\'s easy and quick.</string>
+    <string name="please_provide_few_details">Please provide few details and sing up now. It\'s easy and quick.</string>
     <string name="name">Name</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="accept">Accept our</string>
@@ -32,7 +32,23 @@
     <string name="menu_fav">Favourites</string>
     <string name="menu_addstation">Add Station</string>
     <string name="internet_error">Please check internet connectivity</string>
-    <string name="text_ok">OK</string>
+    <string name="text_ok">Yes</string>
     <string name="add_station">Add Station</string>
     <string name="login">Login</string>
+    <string name="text_alert_dialog_na">Do You Want to Logout ?</string>
+    <string name="you_have_been_logged_out">You have been Logged Out!</string>
+    <string name="we_detected_a_new_login_from_a_different_device">We dedected a new login from a different device.</string>
+
+
+
+    <string name="title_h">Title*</string>
+    <string name="no_of_charge_points_h">No. Of Charge Points*</string>
+    <string name="address_h">Address*</string>
+    <string name="description_h">Description*</string>
+    <string name="state_h">State*</string>
+    <string name="zip_code_h">Zip Code*</string>
+    <string name="email_h">Email*</string>
+
+
+
 </resources>

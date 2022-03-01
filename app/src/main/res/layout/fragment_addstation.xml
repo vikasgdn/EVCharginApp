@@ -71,7 +71,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
                         android:padding="10dp"
-                        android:text="@string/title"
+                        android:text="@string/title_h"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -82,6 +82,8 @@
                         android:background="@drawable/edit_text_background"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="@string/title"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -93,7 +95,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
                         android:padding="10dp"
-                        android:text="@string/email"
+                        android:text="@string/email_h"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -104,6 +106,9 @@
                         android:background="@drawable/edit_text_background"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -115,7 +120,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
                         android:padding="10dp"
-                        android:text="@string/no_of_charge_points"
+                        android:text="@string/no_of_charge_points_h"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -123,6 +128,9 @@
                         android:id="@+id/et_chargePoints"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:inputType="numberSigned"
                         android:background="@drawable/edit_text_background"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="@string/no_of_charge_points"
@@ -137,7 +145,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
                         android:padding="10dp"
-                        android:text="@string/address"
+                        android:text="@string/address_h"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -148,6 +156,8 @@
                         android:background="@drawable/edit_text_background"
                         android:fontFamily="@font/poppins_regular"
                         android:hint="@string/address"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -159,7 +169,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
                         android:padding="10dp"
-                        android:text="@string/description"
+                        android:text="@string/description_h"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -171,6 +181,8 @@
                         android:fontFamily="@font/poppins_regular"
                         android:hint="@string/description"
                         android:padding="10dp"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -181,7 +193,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
                         android:padding="10dp"
-                        android:text="@string/state"
+                        android:text="@string/state_h"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                     <RelativeLayout
@@ -221,7 +233,7 @@
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
-                        android:text="@string/zip_code"
+                        android:text="@string/zip_code_h"
                         android:padding="@dimen/d_10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -256,11 +268,11 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_add"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/d_button_height"
+                        android:layout_height="45dp"
                         android:layout_weight="1"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/green_rounded_btn"
                         android:text="@string/add_station"

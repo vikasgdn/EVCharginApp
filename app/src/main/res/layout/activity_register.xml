@@ -75,6 +75,7 @@
                         android:gravity="left"
                         android:padding="10dp"
                         android:text="@string/name"
+                        android:maxLines="1"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -85,6 +86,8 @@
                         android:background="@drawable/edit_text_background"
                         android:fontFamily="@font/worksans_regular"
                         android:hint="Name"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -107,6 +110,9 @@
                         android:background="@drawable/edit_text_background"
                         android:fontFamily="@font/worksans_regular"
                         android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -130,6 +136,8 @@
                         android:fontFamily="@font/worksans_regular"
                         android:hint="@string/password"
                         android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -153,6 +161,8 @@
                         android:fontFamily="@font/worksans_regular"
                         android:hint="@string/confirm_password"
                         android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />

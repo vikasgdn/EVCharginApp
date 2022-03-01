@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
@@ -12,10 +13,14 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 
 import com.evcharginapp.R;
@@ -184,6 +189,13 @@ public class AppUtils {
     public static void toast(Activity activity, String message) {
         if (message != null && !message.equals("") && activity != null) {
             Snackbar snack = Snackbar.make(activity.findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+            View view = snack.getView();
+            TextView tv = view.findViewById(com.google.android.material.R.id.snackbar_text);
+            tv.setTextColor(Color.WHITE);
+            FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+            params.gravity = Gravity.TOP;
+            params.setMargins(10, 100, 10,0);
+            view.setLayoutParams(params);
             ViewGroup group = (ViewGroup) snack.getView();
             group.setBackgroundColor(ContextCompat.getColor(activity, R.color.colorPrimary));
             snack.setDuration(3000);

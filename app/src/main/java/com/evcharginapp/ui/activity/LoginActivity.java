@@ -37,7 +37,7 @@ public class LoginActivity extends BaseActivity implements INetworkEvent {
 
 
     @Override
-   protected void initVar() {
+    protected void initVar() {
 
     }
 
@@ -54,10 +54,20 @@ public class LoginActivity extends BaseActivity implements INetworkEvent {
             case R.id.btn_login:
                 if (TextUtils.isEmpty(loginBinding.etEmail.getText().toString()))
                     AppUtils.toast(this,"Please Enter Valid Email");
+                else if (!AppUtils.isValidEmail(loginBinding.etEmail.getText().toString()))
+                    AppUtils.toast(this,"Please Enter Valid Email");
                 else if (TextUtils.isEmpty(loginBinding.etPassword.getText().toString()))
-                    AppUtils.toast(this,"Please Enter Valid Password");
-                else
+                    AppUtils.toast(this, "Please Enter Valid Password");
+                else if (loginBinding.etPassword.getText().toString().length() < 6 || loginBinding.etPassword.getText().toString().length() > 20)
+                    AppUtils.toast(this, "Password length must be 6-20 characters");
+                else if (!loginBinding.etPassword.getText().toString().matches(".*[0-9].*"))
+                    AppUtils.toast(this, "Password should contain at least 1 digit");
+                else if (!loginBinding.etPassword.getText().toString().matches(".*[a-zA-Z].*"))
+                    AppUtils.toast(this, "Password should contain at least 1 alphabet");
+                else {
+                    AppUtils.hideKeyboard(this);
                     getLoginAPI();
+                }
                 break;
             case R.id.btn_register:
                 Intent intent1=new Intent(this, RegisterActivity.class);

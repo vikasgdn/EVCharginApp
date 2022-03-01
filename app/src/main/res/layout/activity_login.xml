@@ -78,7 +78,10 @@
                     android:background="@drawable/edit_text_background"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
                     android:padding="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -93,17 +96,27 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/et_password"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:padding="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_background"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

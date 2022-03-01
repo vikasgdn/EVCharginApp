@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/dialog.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/dialog_confirm_na.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/fragment_addstation.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_favroute.xml" value="0.16623376623376623" />

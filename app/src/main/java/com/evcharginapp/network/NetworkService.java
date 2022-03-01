@@ -8,7 +8,9 @@ import android.util.Log;
 
 import com.evcharginapp.AppConstants.AppConstant;
 import com.evcharginapp.apppreferences.AppPreference;
+import com.evcharginapp.dialog.Alert;
 import com.evcharginapp.ui.activity.LoginActivity;
+import com.evcharginapp.ui.activity.RegisterActivity;
 
 import org.json.JSONObject;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +30,7 @@ public class NetworkService  {
     private INetworkEvent networkEvent;
     private Context context;
     private JSONObject jsonObject;
+    private int statusCode=200;
 
     public NetworkService(JSONObject jsonObject,String serviceName, String method, INetworkEvent networkEvent, Context context) {
         service = serviceName;
@@ -99,6 +102,7 @@ public class NetworkService  {
 
                 Log.e("NW RESPONSE====> ",""+service+" || "+response.toString());
                 if (response.code() >= 200 && response.code() < 500) {
+                    statusCode=response.code();
                     isError = false;
                     ResponseBody responseBody = response.body();
                     String s = responseBody.string();
@@ -127,7 +131,17 @@ public class NetworkService  {
                         networkEvent.onNetworkCallError(service, message);
                     }
                     else {
-                        networkEvent.onNetworkCallCompleted("",service, s);
+                        if (statusCode==401)
+                        {
+                            if(context instanceof LoginActivity || context instanceof RegisterActivity)
+                                networkEvent.onNetworkCallCompleted("",service, s);
+                            else
+                            {
+                                Alert.showLogoutAlertDialogNewDesgin(context);
+                            }
+                        }
+                        else
+                            networkEvent.onNetworkCallCompleted("",service, s);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
