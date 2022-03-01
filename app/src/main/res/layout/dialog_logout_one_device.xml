@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginLeft="@dimen/d_16dp"
+    android:layout_marginRight="@dimen/d_16dp"
+    android:background="@drawable/white_rounded_btn"
+    >
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="@dimen/d_30dp"
+        android:layout_height="@dimen/d_30dp"
+        android:src="@drawable/ic_baseline_cancel_24"
+        android:padding="@dimen/d_4dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/d_8dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/d_30dp">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/solid_color_circle_peech"
+            android:padding="@dimen/d_12dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_baseline_login_24" />
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_25dp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center_horizontal"
+            android:text="@string/you_have_been_logged_out"
+            android:textColor="@color/new_textcolor_black"
+            android:textSize="18sp"
+             />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d_8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/we_detected_a_new_login_from_a_different_device"
+            android:textColor="@color/new_textcolor_black"
+            android:textSize="@dimen/s_text_size_14"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
